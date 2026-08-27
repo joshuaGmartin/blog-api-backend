@@ -1,0 +1,52 @@
+<form
+  action="/login"
+  method="post"
+  class="top-spacing-xl column align-center gap-m"
+>
+  <h2>Login</h2>
+  <%- include("../errors") %>
+  <label for="username" class="column"
+    >Username<input
+      type="text"
+      name="username"
+      id="username"
+      value="<%= locals.values?.username || '' %>"
+      required
+  /></label>
+  <label for="password" class="column">
+    <div class="row just-space-between">
+      Password
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-eye-icon lucide-eye unselectable show-clickable hover-white"
+        id="show-password-button"
+      >
+        <path
+          d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+        />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    </div>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      value="<%= locals.values?.password || '' %>"
+      required
+    />
+  </label>
+
+  <div class="column align-center gap-s">
+    <button type="submit">Login</button>
+    <button id="demo-password-button">Fill Demo Password</button>
+  </div>
+</form>

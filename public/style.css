@@ -1,0 +1,254 @@
+@import url("./reset.css");
+
+:root {
+  --primary-color: black;
+  --secondary-color: white;
+  --primary-bg: oklch(80.9% 0.105 251.813);
+  --secondary-bg: oklch(88.2% 0.059 254.128);
+
+  --spacing-xs: 0.25rem;
+  --spacing-s: 0.5rem;
+  --spacing-m: 1rem;
+  --spacing-l: 2rem;
+  --spacing-xl: 5rem;
+
+  --global-min-width: 375px;
+
+  color: var(--primary-color);
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* debugging */
+  * {
+    /* outline: red solid 1px; */
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--primary-bg);
+
+  min-width: var(--global-min-width);
+
+  > * {
+    padding: 0 var(--spacing-m);
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--secondary-bg);
+
+  position: sticky;
+  top: 0;
+
+  nav {
+    display: flex;
+    gap: var(--spacing-s);
+
+    #header-user-logout {
+      display: flex;
+      gap: var(--spacing-xs);
+
+      #header-logout {
+        display: flex;
+        align-items: center;
+
+        min-width: max-content;
+      }
+    }
+  }
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================================================================== */
+/* Classes */
+/* ========================================================================== */
+
+.min-width-max-cont {
+  min-width: max-content;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.just-center {
+  justify-content: center;
+}
+
+.just-space-bet {
+  justify-content: space-between;
+}
+
+.top-spacing-m {
+  margin-top: var(--spacing-m);
+}
+.top-spacing-l {
+  margin-top: var(--spacing-l);
+}
+
+.top-spacing-xl {
+  margin-top: var(--spacing-xl);
+}
+
+.gap-m {
+  gap: var(--spacing-m);
+}
+
+.gap-s {
+  gap: var(--spacing-s);
+}
+
+.gap-xs {
+  gap: var(--spacing-xs);
+}
+
+.primary-color {
+  color: var(--primary-color);
+}
+
+.padding-top-s {
+  padding-top: var(--spacing-s);
+}
+
+.padding-bottom-s {
+  padding-bottom: var(--spacing-s);
+}
+
+.padding-left {
+  padding-left: var(--spacing-m);
+}
+
+.padding-right {
+  padding-right: var(--spacing-m);
+}
+
+.no-button-style {
+  background: none;
+  border: none;
+}
+
+.hover-white {
+  &:hover {
+    color: var(--secondary-color);
+  }
+}
+
+.no-shrink {
+  width: max-content;
+}
+
+.wrap {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+/* ========================================================================== */
+/* Special Classes */
+/* ========================================================================== */
+
+.instructions {
+  font-size: small;
+  font-style: italic;
+}
+
+.hide-link-style {
+  appearance: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-style {
+  background: none;
+  border: none;
+  padding: 0;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+.unselectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard syntax */
+}
+
+.show-clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.underline-hover {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.lucide {
+  color: var(--primary-color);
+
+  &:hover {
+    color: var(--secondary-color);
+  }
+}
+
+/* ========================================================================== */
+/* Mobile */
+/* ========================================================================== */
+
+@media (max-width: 768px) {
+  header {
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+
+    position: sticky;
+    top: 0;
+
+    nav {
+      display: flex;
+      gap: var(--spacing-s);
+
+      #header-user-logout {
+        display: flex;
+        gap: var(--spacing-xs);
+
+        #header-logout {
+          display: flex;
+          align-items: center;
+
+          min-width: max-content;
+        }
+      }
+    }
+  }
+}
