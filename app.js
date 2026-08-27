@@ -19,37 +19,37 @@ app.use(express.urlencoded({ extended: true }));
 // ==========================================================================
 // session
 // ==========================================================================
-import expressSession from "express-session";
-import { PrismaPg } from "@prisma/adapter-pg"; // For other db adapters, see Prisma docs
-import { PrismaClient } from "./generated/prisma/client.js";
-import { PrismaSessionStore } from "@quixo3/prisma-session-store";
+// import expressSession from "express-session";
+// import { PrismaPg } from "@prisma/adapter-pg"; // For other db adapters, see Prisma docs
+// import { PrismaClient } from "./generated/prisma/client.js";
+// import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
-const connectionString = `${process.env.DATABASE_URL}`;
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
+// const connectionString = `${process.env.DATABASE_URL}`;
+// const adapter = new PrismaPg({ connectionString });
+// const prisma = new PrismaClient({ adapter });
 
-app.use(
-  expressSession({
-    cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week in ms
-    },
-    secret: process.env.COOKIE_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    store: new PrismaSessionStore(prisma, {
-      checkPeriod: 2 * 60 * 1000, //ms
-      dbRecordIdIsSessionId: true,
-      dbRecordIdFunction: undefined,
-    }),
-  }),
-);
+// app.use(
+//   expressSession({
+//     cookie: {
+//       maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week in ms
+//     },
+//     secret: process.env.COOKIE_SECRET,
+//     resave: true,
+//     saveUninitialized: true,
+//     store: new PrismaSessionStore(prisma, {
+//       checkPeriod: 2 * 60 * 1000, //ms
+//       dbRecordIdIsSessionId: true,
+//       dbRecordIdFunction: undefined,
+//     }),
+//   }),
+// );
 
 // ==========================================================================
 // authentication
 // ==========================================================================
 import passport from "passport";
 import "./config/passport.js";
-app.use(passport.session());
+// app.use(passport.session());
 
 // ==========================================================================
 // variables/middleware
@@ -57,7 +57,8 @@ app.use(passport.session());
 //globals
 app.use((req, res, next) => {
   res.locals.appTitle = "appTitleGoesHere";
-  res.locals.isAuth = req.isAuthenticated();
+  // res.locals.isAuth = req.isAuthenticated();
+  res.locals.isAuth = false;
   // in .ejs, check locals.isAuth first to avoid crash on locals.user check
   res.locals.user = req.user;
   next();

@@ -2,3 +2,13 @@ now:
 
 
 later:
+
+
+
+for template:
+- add env.sample file
+- add "@prisma/client": "^7.8.0", to package.json dependencies 
+- add "prisma": "^7.8.0", to package.json dependencies 
+- add "@prisma/adapter-pg": "^7.10.0", to package.json dependencies 
+- fix last header in readme 
+- delete prisma migrate?
