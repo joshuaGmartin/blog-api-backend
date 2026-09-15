@@ -66,14 +66,58 @@ app.use((req, res, next) => {
 
 //debug
 // app.use((req, res, next) => {
-//   console.log(res.locals);
+//   // console.log(res.locals);
+//   console.log(req.body);
 //   next();
 // });
 
 // ==========================================================================
 // routes
 // ==========================================================================
+
+//test>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+import jwt from "jsonwebtoken";
+
+app.get("/api", (req, res) => {
+  res.json({ message: "Welcome to the API" });
+});
+
+app.post("/api/posts", verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      res.json({ message: "post created", authData });
+    }
+  });
+});
+
+app.post("/api/login", (req, res) => {
+  //mock user (should auth here)
+  const user = { id: 1, username: "brad", email: "brad@gmail.com" };
+
+  jwt.sign({ user }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+    res.json({ token });
+  });
+});
+
+function verifyToken(req, res, next) {
+  //get auth header
+  const bearerHeader = req.headers["authorization"];
+  // if (typeof bearerHeader !== "undefined") {
+  if (!bearerHeader) {
+    res.sendStatus(403);
+  } else {
+    const bearer = bearerHeader.split(" ");
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    next();
+  }
+}
+//test>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 import router from "./routes/index.js";
+import { type } from "node:os";
 
 app.use(router);
 
@@ -95,7 +139,7 @@ const PORT = 3000;
 app.listen(PORT, (err) => {
   if (err) throw err;
 
-  console.log("Listening on port: ", PORT);
+  console.log("Listening on port:", PORT);
 });
 
 // ==========================================================================

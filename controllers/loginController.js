@@ -1,5 +1,6 @@
 import { body, validationResult } from "express-validator";
 import passport from "passport";
+import jwt from "jsonwebtoken";
 
 const validateUser = [
   body("username").trim().notEmpty().withMessage("Must include username"),
@@ -18,18 +19,18 @@ const auth = (req, res, next) =>
       const values = req.body;
       const errors = { msg: info.message }; // convert authentication failure to error display
 
-      return res.status(401).render("login", {
+      return res.status(401).json({
         errors: [errors],
         values: values,
       });
     }
 
-    req.login(user, (err) => {
+    jwt.sign({ user }, "secretkey", { expiresIn: "1d" }, (err, token) => {
       if (err) return next(err);
 
-      return res.redirect("/home");
+      res.json({ token, user });
     });
-  })(req, res, next); // passport.authenticate returns a function that needs to be called with wrapper function's (auth) parameters
+  })(req, res, next); // passport.authenticate returns a function that needs to be called with wrapper function's (auth()) parameters
 
 export const postLogin = [
   validateUser,
